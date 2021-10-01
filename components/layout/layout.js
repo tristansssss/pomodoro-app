@@ -1,9 +1,13 @@
+import styled from "@emotion/styled"
 
+const LayoutContainer = styled.div`
+
+`;
 
 export default function Layout({ children }) {
   return (
-    <div>
+    <LayoutContainer>
       {children}
-    </div>
+    </LayoutContainer>
   )
 }
