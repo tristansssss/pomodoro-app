@@ -1,9 +1,8 @@
 import Timeinput from "@components/Input/TimeInput";
-import { useCountRenders } from "hooks/useCountRenders";
 import useTheme from "hooks/useTheme";
 import useTimer from "hooks/useTimer";
 import Image from "next/image";
-import { memo, useEffect, useState } from "react";
+import { memo, useState } from "react";
 import {
   Button,
   ColorContainer,

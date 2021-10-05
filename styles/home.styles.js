@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mediaQueries } from "utils/mediaQueries";
 
 export const CardContainer = styled.section`
   display: grid;
@@ -6,6 +7,9 @@ export const CardContainer = styled.section`
   justify-items: center;
   align-items: center;
   height: 100%;
+  ${mediaQueries("md")`
+    grid-template-rows: 0.44fr 1.56fr;
+  `}
 `;
 
 export const ProgressBarContainer = styled.div`
@@ -21,11 +25,13 @@ export const ProgressBarContainer = styled.div`
   box-shadow: #161932;
   /* https://css-tricks.com/almanac/properties/b/box-shadow/ */
   box-shadow: 33px 33px 55px 8px #161932;
+  ${mediaQueries("md")`
+    height: 410px;
+    width: 410px;
+  `}
 `;
 
-export const MainContainer = styled.main`
-  /* border: 3px solid red; */
-`;
+export const MainContainer = styled.main``;
 
 export const HeaderContainer = styled.header`
   position: relative;
@@ -38,6 +44,10 @@ export const HeaderContainer = styled.header`
     font-size: 24px;
     font-family: "Kumbh Sans", sans-serif;
     color: #d7e0ff;
+    ${mediaQueries("md")`
+      width: 156px;
+      font-size: 32px;
+    `}
   }
 `;
 export const FooterContainer = styled.footer`
@@ -45,13 +55,10 @@ export const FooterContainer = styled.footer`
   justify-content: center;
   width: 100%;
   cursor: pointer;
-  /* border: 1px solid black; */
-
   > div {
     position: relative;
     height: 28px;
     width: 28px;
-    /* border:1px solid black; */
   }
 `;
 
@@ -67,4 +74,10 @@ export const SettingsContainer = styled.div`
   background-color: #ffffff;
   font-family: "Kumbh Sans", sans-serif;
   z-index: 1;
+  ${mediaQueries("md")`
+    grid-template-rows: 0.81fr 1.36fr 0.77fr 1.06fr;
+    width: 540px;
+    height: 464px;
+    padding: 34px 40px 34px 40px;
+  `}
 `;

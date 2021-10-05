@@ -1,18 +1,5 @@
 import styled from "@emotion/styled";
-
-export const SettingsContainer = styled.div`
-  display: ${(props) => (props.open ? "grid" : "none")};
-  grid-template-rows: 0.52fr 1.56fr 0.84fr 1.08fr;
-  position: absolute;
-  padding: 24px;
-  border: 3px solid white;
-  border-radius: 15px;
-  width: 327px;
-  height: 575px;
-  background-color: #ffffff;
-  font-family: "Kumbh Sans", sans-serif;
-  z-index: 1;
-`;
+import { mediaQueries } from "utils/mediaQueries";
 
 export const SettingsHeader = styled.div`
   display: flex;
@@ -24,6 +11,9 @@ export const SettingsHeader = styled.div`
     height: 14px;
     cursor: pointer;
   }
+  ${mediaQueries("md")`
+  font-size: 28px
+  `}
 `;
 
 export const TimeContainer = styled.div`
@@ -33,21 +23,41 @@ export const TimeContainer = styled.div`
     text-align: center;
     letter-spacing: 4.23px;
     font-size: 11px;
-    height: 53px;
+    height: 29px;
     color: #161932;
   }
+  ${mediaQueries("md")`
+  position: relative;
+    > div:first-of-type {
+      font-size: 13px;
+      text-align: left;
+      letter-spacing: 5px;
+      font-weight: bold;
+      height: 39px;
+    }
+
+`}
 `;
 
 export const TimeInputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  ${mediaQueries("md")`
+    flex-direction: row;
+    gap: 20px;
+  `}
 `;
 
 export const TimeInputElement = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  ${mediaQueries("md")`
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  `}
 `;
 
 export const TimeInputLabel = styled.div`
@@ -67,6 +77,7 @@ export const FontContainer = styled.div`
     letter-spacing: 4.23px;
     font-size: 11px;
     color: #161932;
+    /* border: 1px solid purple; */
   }
   > div:nth-of-type(2) {
     display: flex;
@@ -75,7 +86,19 @@ export const FontContainer = styled.div`
     margin-top: 18px;
     width: 152px;
     height: 40px;
+    /* border: 1px solid purple; */
   }
+  ${mediaQueries("md")`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    > div:nth-of-type(2) { 
+      margin-top: 0;
+    }
+    
+
+
+  `}
 `;
 
 export const ColorContainer = styled.div`
@@ -97,6 +120,17 @@ export const ColorContainer = styled.div`
     width: 152px;
     height: 40px;
   }
+  ${mediaQueries("md")`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    > div:nth-of-type(2) { 
+      margin-top: 0;
+    }
+    
+
+
+  `}
 `;
 
 export const Dot = styled.div`

@@ -1,10 +1,10 @@
-import { useRef, useEffect, useState } from "react";
 import useTheme from "hooks/useTheme";
+import { useEffect, useRef, useState } from "react";
 import {
-  ProgressBarSvg,
   BackgroundInnter,
-  ProgressTime,
   Button,
+  ProgressBarSvg,
+  ProgressTime,
 } from "./progressbar.style";
 
 const ProgressBar = ({ progress, time, isActive, toggle, reset, seconds }) => {

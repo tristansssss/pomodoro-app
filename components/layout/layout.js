@@ -1,10 +1,8 @@
 import styled from "@emotion/styled";
 import Head from "next/head";
-import Image from "next/image";
-import { Children } from "react";
+import { mediaQueries } from "utils/mediaQueries";
 
 const LayoutContainer = styled.div`
-  /* border: 10px solid black; */
   position: absolute;
   top: 0;
   left: 0;
@@ -14,6 +12,12 @@ const LayoutContainer = styled.div`
   height: 100%;
   background-color: ${(props) =>
     props.bgColor ? props.bgColor : "transparent"};
+  ${mediaQueries("md")`
+    grid-template-rows: 0.32fr 2.3fr 0.38fr;
+  `}
+  ${mediaQueries("xl")`
+    grid-template-rows: 0.3fr 2.38fr 0.31fr;
+  `}
 `;
 
 export default function Layout({ header, main, footer, bgColor, children }) {

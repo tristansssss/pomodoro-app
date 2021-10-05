@@ -1,17 +1,16 @@
-import React, { useState, useEffect, useCallback } from "react";
 import Layout from "@components/layout/layout";
 import ProgressBar from "@components/progressbar/progressbar";
-import ToolBar from "@components/toolbar/toolbar";
-import Image from "next/image";
 import Settings from "@components/settings/settings";
+import ToolBar from "@components/toolbar/toolbar";
 import useTimer from "hooks/useTimer";
-import { useCountRenders } from "hooks/useCountRenders";
+import Image from "next/image";
+import React, { useCallback, useState } from "react";
 import {
   CardContainer,
-  ProgressBarContainer,
-  MainContainer,
-  HeaderContainer,
   FooterContainer,
+  HeaderContainer,
+  MainContainer,
+  ProgressBarContainer,
   SettingsContainer,
 } from "../styles/home.styles";
 

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mediaQueries } from "utils/mediaQueries";
 
 export const ProgressBarSvg = styled.svg`
   height: 100%;
@@ -38,8 +39,8 @@ export const ProgressTime = styled.div`
   right: 0;
   top: 30%;
 
-  width: 184px;
-  height: 106px;
+  /* width: 184px;
+  height: 106px; */
   text-align: center;
   font-size: 80px;
   font-family: ${(props) => props.theme.fontFamily};
@@ -49,6 +50,10 @@ export const ProgressTime = styled.div`
     props.theme.fontFamily === '"Space Mono", monospace' ? "-10px" : "0px"};
   color: #d7e0ff;
   opacity: 0.8;
+  ${mediaQueries("md")`
+    font-size:100px;
+
+  `}
 `;
 
 export const Button = styled.button`
@@ -76,4 +81,12 @@ export const Button = styled.button`
 
   background-color: transparent;
   cursor: pointer;
+  ${mediaQueries("md")`
+    width: 112px;
+    height: 21px;
+    font-size: 16px;
+    letter-spacing: 15px;
+
+
+  `}
 `;
