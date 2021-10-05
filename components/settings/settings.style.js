@@ -30,7 +30,6 @@ export const TimeContainer = styled.div`
   border-bottom: 1px solid #e3e1e1;
   padding: 24px 0 24px 0;
   > div:first-of-type {
-    /* margin-top: 24px; */
     text-align: center;
     letter-spacing: 4.23px;
     font-size: 11px;
@@ -58,7 +57,6 @@ export const TimeInputLabel = styled.div`
 `;
 
 export const FontContainer = styled.div`
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -70,14 +68,13 @@ export const FontContainer = styled.div`
     font-size: 11px;
     color: #161932;
   }
-  > div:nth-of-type(2){
+  > div:nth-of-type(2) {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 18px;
     width: 152px;
     height: 40px;
-    /* border:1px solid black; */
   }
 `;
 
@@ -92,14 +89,13 @@ export const ColorContainer = styled.div`
     font-size: 11px;
     color: #161932;
   }
-  > div:nth-of-type(2){
+  > div:nth-of-type(2) {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 18px;
     width: 152px;
     height: 40px;
-    /* border:1px solid black; */
   }
 `;
 
@@ -109,15 +105,16 @@ export const Dot = styled.div`
   align-items: center;
   height: 35px;
   width: 35px;
-  color: ${props => props.highlight ? '#FFFFFF' : '#1E213F'};
-  background-color: ${props => props.highlight ? '#161932' : props.color ? props.color : '#EFF1FA'};
+  color: ${(props) => (props.highlight ? "#FFFFFF" : "#1E213F")};
+  background-color: ${(props) =>
+    props.highlight ? "#161932" : props.color ? props.color : "#EFF1FA"};
   border-radius: 50%;
   text-align: center;
   letter-spacing: 0;
   font-size: 15px;
-  font-family: ${props => props.fontFamily ? props.fontFamily : '"Kumbh Sans", sans-serif'};
+  font-family: ${(props) =>
+    props.fontFamily ? props.fontFamily : '"Kumbh Sans", sans-serif'};
   cursor: pointer;
-  /* display: inline-block; */
 `;
 
 export const Button = styled.button`

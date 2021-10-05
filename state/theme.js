@@ -1,29 +1,34 @@
 import { useReducer, createContext, useMemo } from "react";
 
 const themeSettingInitialState = {
-  color: '#F87070',
-  fontFamily: '"Kumbh Sans", sans-serif'
-}
+  color: "#F87070",
+  fontFamily: '"Kumbh Sans", sans-serif',
+};
 
 function themeSettingReducer(state, action) {
   switch (action.type) {
-    case 'set_theme':
-      return {...state, ...action.payload}
+    case "set_theme":
+      return { ...state, ...action.payload };
     default:
-      return state
+      return state;
   }
 }
 
 export const ThemeSettingContext = createContext({
   themeState: themeSettingInitialState,
-  dispatch: () => null
-})
+  dispatch: () => null,
+});
 
 export const ThemeSettingProvider = ({ children }) => {
-  const [themeState, dispatch] = useReducer(themeSettingReducer, themeSettingInitialState);
+  const [themeState, dispatch] = useReducer(
+    themeSettingReducer,
+    themeSettingInitialState
+  );
   return (
-    <ThemeSettingContext.Provider value={useMemo(() => ({ themeState, dispatch }), [themeState, dispatch])}>
+    <ThemeSettingContext.Provider
+      value={useMemo(() => ({ themeState, dispatch }), [themeState, dispatch])}
+    >
       {children}
     </ThemeSettingContext.Provider>
-  )
-}
+  );
+};
