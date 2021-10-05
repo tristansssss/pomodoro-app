@@ -1,164 +1,65 @@
-import styled from "@emotion/styled";
-import Image from "next/image";
 import Timeinput from "@components/Input/TimeInput";
+import useTheme from "hooks/useTheme";
+import useTimer from "hooks/useTimer";
+import Image from "next/image";
+import { memo, useState } from "react";
+import {
+  Button,
+  ColorContainer,
+  Dot,
+  FontContainer,
+  SettingsHeader,
+  TimeContainer,
+  TimeInputContainer,
+  TimeInputElement,
+  TimeInputLabel,
+} from "./settings.style";
 
-const SettingsContainer = styled.div`
-  display: ${(props) => (props.open ? "grid" : "none")};
-  grid-template-rows: 0.52fr 1.56fr 0.84fr 1.08fr;
-  position: absolute;
-  padding: 24px;
-  border: 3px solid white;
-  border-radius: 15px;
-  width: 327px;
-  height: 575px;
-  background-color: #ffffff;
-  font-family: "Kumbh Sans", sans-serif;
-`;
+const Settings = memo(({ toggleModal }) => {
+  // useCountRenders()
+  const { state, setTimeSettingsDispatch, reset } = useTimer();
+  const { themeState, setTheme } = useTheme();
 
-const SettingsHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #e3e1e1;
-  > div:nth-of-type(2) {
-    position: relative;
-    width: 14px;
-    height: 14px;
-    cursor: pointer;
-  }
-`;
+  const [timeSettings, setTimeSettings] = useState({
+    pomodoro: state.pomodoro,
+    break: state.break,
+    longBreak: state.longBreak,
+  });
 
-const TimeContainer = styled.div`
-  border-bottom: 1px solid #e3e1e1;
-  padding: 24px 0 24px 0;
-  > div:first-of-type {
-    /* margin-top: 24px; */
-    text-align: center;
-    letter-spacing: 4.23px;
-    font-size: 11px;
-    height: 53px;
-    color: #161932;
-  }
-`;
+  const [themeSettings, setThemeSettings] = useState({
+    color: themeState.color,
+    fontFamily: themeState.fontFamily,
+  });
 
-const TimeInputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
+  const handlePomodoroChange = (v) => {
+    setTimeSettings({ ...timeSettings, pomodoro: v * 60 });
+  };
+  const handleBreakChange = (v) => {
+    setTimeSettings({ ...timeSettings, break: v * 60 });
+  };
+  const handleLongBreakChange = (v) => {
+    setTimeSettings({ ...timeSettings, longBreak: v * 60 });
+  };
 
-const TimeInputElement = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
+  const handleDispatch = () => {
+    setTimeSettingsDispatch(timeSettings);
+    setTheme(themeSettings);
+  };
 
-const TimeInputLabel = styled.div`
-  font-size: 12px;
-  letter-spacing: 0;
-  opacity: 0.4;
-`;
+  const handleThemeSettings = (type, value) => {
+    setThemeSettings({
+      ...themeSettings,
+      [type]: value,
+    });
+  };
 
-const FontContainer = styled.div`
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid #e3e1e1;
-  > div:first-of-type {
-    text-align: center;
-    letter-spacing: 4.23px;
-    font-size: 11px;
-    color: #161932;
-  }
-  > div:nth-of-type(2){
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 18px;
-    width: 152px;
-    height: 40px;
-    /* border:1px solid black; */
-  }
-`;
-
-const ColorContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  > div {
-    text-align: center;
-    letter-spacing: 4.23px;
-    font-size: 11px;
-    color: #161932;
-  }
-  > div:nth-of-type(2){
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 18px;
-    width: 152px;
-    height: 40px;
-    /* border:1px solid black; */
-
-  }
-`;
-
-const Dot = styled.div`
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 35px;
-      width: 35px;
-      background-color: ${props => props.color? props.color : '#EFF1FA'};
-      border-radius: 50%;
-      text-align: center;
-      letter-spacing: 0;
-      font-size: 15px;
-      font-family: ${props => props.fontFamily ? props.fontFamily : '"Kumbh Sans", sans-serif'};
-      cursor: pointer;
-      /* display: inline-block; */
-`;
-const Button = styled.button`
-  position: absolute;
-  bottom: -26px;
-  left: 0;
-  right: 0;
-
-  margin-left: auto;
-  margin-right: auto;
-
-  width: 140px;
-  height: 53px;
-
-  border-radius: 26.5px;
-  border: none;
-  font-family: "Kumbh Sans", sans-serif;
-
-  background-color: #f87070;
-  color: #ffffff;
-  cursor: pointer;
-`;
-
-const Settings = ({ open, setModal }) => {
-
-  const handleChange1 = (v) => {
-    console.log(v)
-  }
-  const handleChange2 = (v) => {
-    console.log(v)
-  }
-  const handleChange3 = (v) => {
-    console.log(v)
-  }
   return (
-    <SettingsContainer open={open}>
+    <>
       <SettingsHeader>
         <div>Settings</div>
         <div>
           <Image
-            onClick={setModal(!open)}
+            onClick={toggleModal}
             layout="fill"
             src="/assets/icon-close.svg"
           />
@@ -169,37 +70,107 @@ const Settings = ({ open, setModal }) => {
         <TimeInputContainer>
           <TimeInputElement>
             <TimeInputLabel>pomodoro</TimeInputLabel>
-            <Timeinput onChange={handleChange1} />
+            <Timeinput
+              currentValue={timeSettings.pomodoro / 60}
+              onChange={handlePomodoroChange}
+            />
           </TimeInputElement>
           <TimeInputElement>
             <TimeInputLabel>short break</TimeInputLabel>
-            <Timeinput onChange={handleChange2} />
+            <Timeinput
+              currentValue={timeSettings.break / 60}
+              onChange={handleBreakChange}
+            />
           </TimeInputElement>
           <TimeInputElement>
             <TimeInputLabel>long break</TimeInputLabel>
-            <Timeinput onChange={handleChange3} />
+            <Timeinput
+              currentValue={timeSettings.longBreak / 60}
+              onChange={handleLongBreakChange}
+            />
           </TimeInputElement>
         </TimeInputContainer>
       </TimeContainer>
       <FontContainer>
         <div>FONT</div>
         <div>
-          <Dot>Aa</Dot>
-          <Dot fontFamily={"'Roboto Slab', serif"}>Aa</Dot>
-          <Dot fontFamily={"'Space Mono', monospace"}>Aa</Dot>
+          <Dot
+            onClick={() =>
+              handleThemeSettings("fontFamily", '"Kumbh Sans", sans-serif')
+            }
+            fontFamily={'"Kumbh Sans", sans-serif'}
+            highlight={
+              themeSettings.fontFamily.toString() === '"Kumbh Sans", sans-serif'
+            }
+          >
+            Aa
+          </Dot>
+          <Dot
+            onClick={() =>
+              handleThemeSettings("fontFamily", '"Roboto Slab", serif')
+            }
+            fontFamily={'"Roboto Slab", serif'}
+            highlight={themeSettings.fontFamily === '"Roboto Slab", serif'}
+          >
+            Aa
+          </Dot>
+          <Dot
+            onClick={() =>
+              handleThemeSettings("fontFamily", '"Space Mono", monospace')
+            }
+            fontFamily={"'Space Mono', monospace"}
+            highlight={themeSettings.fontFamily === '"Space Mono", monospace'}
+          >
+            Aa
+          </Dot>
         </div>
       </FontContainer>
       <ColorContainer>
         <div>COLOR</div>
         <div>
-          <Dot color={"#F87070"}></Dot>
-          <Dot color={"#70F3F8"}></Dot>
-          <Dot color={"#D881F8"}></Dot>
+          <Dot
+            onClick={() => handleThemeSettings("color", "#F87070")}
+            color={"#F87070"}
+          >
+            {themeSettings.color === "#F87070" ? (
+              <>
+                <Image width={12.41} height={8.45} src="/assets/check.svg" />
+              </>
+            ) : (
+              <></>
+            )}
+          </Dot>
+          <Dot
+            onClick={() => handleThemeSettings("color", "#70F3F8")}
+            color={"#70F3F8"}
+          >
+            {themeSettings.color === "#70F3F8" ? (
+              <>
+                <Image width={12.41} height={8.45} src="/assets/check.svg" />
+              </>
+            ) : (
+              <></>
+            )}
+          </Dot>
+          <Dot
+            onClick={() => handleThemeSettings("color", "#D881F8")}
+            color={"#D881F8"}
+          >
+            {themeSettings.color === "#D881F8" ? (
+              <>
+                <Image width={12.41} height={8.45} src="/assets/check.svg" />
+              </>
+            ) : (
+              <></>
+            )}
+          </Dot>
         </div>
       </ColorContainer>
-      <Button>Apply</Button>
-    </SettingsContainer>
+      <div onClick={toggleModal}>
+        <Button onClick={() => handleDispatch()}>Apply</Button>
+      </div>
+    </>
   );
-};
+});
 
 export default Settings;
