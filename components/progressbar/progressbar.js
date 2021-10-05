@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { useRef, useEffect, useState } from "react";
+import useTheme from "hooks/useTheme";
 
 const ProgressBarSvg = styled.svg`
   height: 100%;
@@ -13,6 +14,7 @@ const ProgressBarSvg = styled.svg`
     transition: stroke-dashoffset 0.35s;
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
+    stroke: var(--color-accent);
   }
 `;
 
@@ -43,7 +45,7 @@ const ProgressTime = styled.div`
   height: 106px;
   text-align: center;
   font-size: 80px;
-  font-family: "Roboto Slab", serif;
+  font-family: ${props => props.themeFontFamily};
   font-weight: bold;
   color: #d7e0ff;
   opacity: 0.8;
@@ -67,7 +69,7 @@ const Button = styled.button`
   border: none;
 
   text-align: center;
-  font-family: "Roboto Slab", serif;
+  font-family: ${props => props.themeFontFamily};
   font-size: 14px;
   letter-spacing: 13.13px;
   font-size: bold;
@@ -78,6 +80,8 @@ const Button = styled.button`
 `;
 
 const ProgressBar = ({ progress, time }) => {
+  const { themeState } = useTheme()
+
   const circleElement = useRef();
   const [circleStyles, setCircleStyles] = useState({
     strokeDashArray: null,
@@ -104,7 +108,6 @@ const ProgressBar = ({ progress, time }) => {
         <circle
           ref={circleElement}
           className="circle"
-          stroke={"#D881F8"}
           strokeWidth={8}
           fill="transparent"
           r="41%"
@@ -112,8 +115,8 @@ const ProgressBar = ({ progress, time }) => {
           cy="50%"
         />
       </ProgressBarSvg>
-      <ProgressTime>{time}</ProgressTime>
-      <Button>pause</Button>
+      <ProgressTime themeFontFamily={themeState.fontFamily}>{time}</ProgressTime>
+      <Button themeFontFamily={themeState.fontFamily}>pause</Button>
     </>
   );
 };

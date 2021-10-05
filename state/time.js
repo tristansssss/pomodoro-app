@@ -1,14 +1,33 @@
-import { useReducer, useContext } from "react";
+import { useReducer, createContext, useMemo } from "react";
 
-const initialState = { count: 0 };
+const timeSettingInitialState = {
+  pomodoro: 1500,
+  break: 300,
+  longBreak: 900,
+  mode: 'pomodoro'
+}
 
-function reducer(state, action) {
+function timeSettingReducer(state, action) {
   switch (action.type) {
-    case "increment":
-      return { count: state.count + 1 };
-    case "decrement":
-      return { count: state.count - 1 };
+    case 'set_time_settings':
+      return { ...state, ...action.payload }
+    case 'set_mode':
+      return { ...state, mode: action.payload }
     default:
-      throw new Error();
+      return state
   }
+}
+
+export const TimeSettingContext = createContext({
+  state: timeSettingInitialState,
+  dispatch: () => null
+})
+
+export const TimeSettingProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(timeSettingReducer, timeSettingInitialState);
+  return (
+    <TimeSettingContext.Provider value={useMemo(() => ({ state, dispatch }), [state, dispatch])}>
+      {children}
+    </TimeSettingContext.Provider>
+  )
 }

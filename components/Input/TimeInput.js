@@ -26,9 +26,9 @@ const TimeInputContainer = styled.div`
   }
 
 `;
-const Timeinput = ({ onChange }) => {
+const Timeinput = ({ defaultValue, currentValue, onChange }) => {
 
-  const [value, setValue ] = useState(25)
+  const [value, setValue ] = useState(currentValue ? currentValue : defaultValue ? defaultValue : 25)
 
   const handleChange = (v) => {
     setValue(v)

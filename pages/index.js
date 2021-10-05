@@ -7,11 +7,12 @@ import Image from "next/image";
 import Settings from "@components/settings/settings";
 
 const CardContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  display: grid;
+  grid-template-rows: 0.49fr 1.5fr;
+  justify-items: center;
   align-items: center;
   height: 100%;
+
 `;
 
 const ProgressBarContainer = styled.div`
@@ -27,20 +28,14 @@ const ProgressBarContainer = styled.div`
   box-shadow: #161932;
   /* https://css-tricks.com/almanac/properties/b/box-shadow/ */
   box-shadow: 33px 33px 55px 8px #161932;
-
-  /* border: 2px solid white; */
 `;
 
 export default function Home() {
-  const [state, setState] = useState(15);
   const [modal, setModal] = useState(false);
-  setTimeout(() => {
-    setState(state + 1);
-  }, 1000);
 
-  const handleClick = (e) => () => {
-    console.log("hello world");
+  const toggleModal = e => () => {
     setModal(!modal);
+    
   };
 
   return (
@@ -52,15 +47,15 @@ export default function Home() {
           <CardContainer>
             <ToolBar />
             <ProgressBarContainer>
-              <ProgressBar progress={state} time={"15:00"} />
+              <ProgressBar progress={15} time={"15:00"} />
             </ProgressBarContainer>
-            <Settings setModal={handleClick} open={modal} />
+            <Settings toggleModal={toggleModal} open={modal} />
           </CardContainer>
         }
         footer={
           <>
             <Image
-              onClick={handleClick()}
+              onClick={toggleModal()}
               layout="fill"
               src="/assets/icon-settings.svg"
             />
