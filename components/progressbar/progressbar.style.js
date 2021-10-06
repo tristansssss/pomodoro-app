@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { mediaQueries } from "utils/mediaQueries";
+import { mediaQueries } from "@utils/mediaQueries";
 
 export const ProgressBarSvg = styled.svg`
   height: 100%;

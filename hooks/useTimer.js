@@ -1,5 +1,5 @@
 import { useCallback, useContext, useState, useEffect } from "react";
-import { TimeSettingContext } from "state/time";
+import { TimeSettingContext } from "@state/time";
 
 const useTimer = () => {
   const { state, dispatch } = useContext(TimeSettingContext);

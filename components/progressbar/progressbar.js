@@ -1,4 +1,4 @@
-import useTheme from "hooks/useTheme";
+import useTheme from "@hooks/useTheme";
 import { useEffect, useRef, useState } from "react";
 import {
   BackgroundInnter,
@@ -11,20 +11,20 @@ const ProgressBar = ({ progress, time, isActive, toggle, reset, seconds }) => {
   const { themeState } = useTheme();
   const circleElement = useRef();
   const [circleStyles, setCircleStyles] = useState({
-    strokeDashArray: null,
-    stokeDashOffset: null,
+    strokeDashArray: 0,
+    stokeDashOffset: 0,
   });
 
   useEffect(() => {
-    const radius = circleElement.current.r.baseVal.value;
+    const radius = circleElement.current?.r?.baseVal?.value;
     const circumference = radius * 2 * Math.PI;
     const offset = circumference - (progress / 100) * circumference;
-    setCircleStyles({
-      strokeDashArray: circumference,
-      stokeDashOffset: offset,
-    });
-    console.log(seconds === 0);
-    console.log(parseInt(progress));
+    if (circumference && offset) {
+      setCircleStyles({
+        strokeDashArray: circumference,
+        stokeDashOffset: offset,
+      });
+    }
   }, [progress]);
 
   return (
@@ -45,16 +45,23 @@ const ProgressBar = ({ progress, time, isActive, toggle, reset, seconds }) => {
           cy="50%"
         />
       </ProgressBarSvg>
-      <ProgressTime theme={themeState}>{time}</ProgressTime>
+      <ProgressTime data-testid="progress-time" theme={themeState}>
+        {time}
+      </ProgressTime>
       {isActive && seconds !== 0 ? (
         <>
-          <Button onClick={() => toggle(false)} theme={themeState}>
+          <Button
+            data-testid="pause-btn"
+            onClick={() => toggle(false)}
+            theme={themeState}
+          >
             pause
           </Button>
         </>
       ) : seconds === 0 ? (
         <>
           <Button
+            data-testid="restart-btn"
             onClick={() => {
               reset();
               toggle(true);
@@ -66,7 +73,11 @@ const ProgressBar = ({ progress, time, isActive, toggle, reset, seconds }) => {
         </>
       ) : (
         <>
-          <Button onClick={() => toggle(true)} theme={themeState}>
+          <Button
+            data-testid="start-btn"
+            onClick={() => toggle(true)}
+            theme={themeState}
+          >
             start
           </Button>
         </>

@@ -24,7 +24,7 @@ const TimeInputContainer = styled.div`
     cursor: pointer;
   }
 `;
-const Timeinput = ({ defaultValue, currentValue, onChange }) => {
+const Timeinput = ({ name, defaultValue, currentValue, onChange }) => {
   const [value, setValue] = useState(
     currentValue ? currentValue : defaultValue ? defaultValue : 25
   );
@@ -38,15 +38,17 @@ const Timeinput = ({ defaultValue, currentValue, onChange }) => {
 
   return (
     <TimeInputContainer>
-      <div>{value}</div>
+      <div data-testid={`${name}-settings-val`}>{value}</div>
       <div>
         <Image
+          data-testid={`increase-${name}`}
           onClick={() => handleChange(value + 1)}
           width={12}
           height={5}
           src="/assets/icon-arrow-up.svg"
         />
         <Image
+          data-testid={`decrease-${name}`}
           onClick={() => handleChange(value - 1)}
           width={12}
           height={5}

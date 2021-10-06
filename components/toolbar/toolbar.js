@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
-import { useCountRenders } from "hooks/useCountRenders";
-import useTheme from "hooks/useTheme";
-import useTimer from "hooks/useTimer";
-import { mediaQueries } from "utils/mediaQueries";
+import useTheme from "@hooks/useTheme";
+import useTimer from "@hooks/useTimer";
+import { mediaQueries } from "@utils/mediaQueries";
 
 const ToolBarContainer = styled.div`
   display: flex;

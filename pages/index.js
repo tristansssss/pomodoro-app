@@ -2,7 +2,7 @@ import Layout from "@components/layout/layout";
 import ProgressBar from "@components/progressbar/progressbar";
 import Settings from "@components/settings/settings";
 import ToolBar from "@components/toolbar/toolbar";
-import useTimer from "hooks/useTimer";
+import useTimer from "@hooks/useTimer";
 import Image from "next/image";
 import React, { useCallback, useState } from "react";
 import {
