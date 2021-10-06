@@ -1,6 +1,6 @@
 import Timeinput from "@components/Input/TimeInput";
-import useTheme from "hooks/useTheme";
-import useTimer from "hooks/useTimer";
+import useTheme from "@hooks/useTheme";
+import useTimer from "@hooks/useTimer";
 import Image from "next/image";
 import { memo, useState } from "react";
 import {
@@ -22,7 +22,7 @@ const Settings = memo(({ toggleModal }) => {
 
   const [timeSettings, setTimeSettings] = useState({
     pomodoro: state.pomodoro,
-    break: state.break,
+    shortBreak: state.shortBreak,
     longBreak: state.longBreak,
   });
 
@@ -35,7 +35,7 @@ const Settings = memo(({ toggleModal }) => {
     setTimeSettings({ ...timeSettings, pomodoro: v * 60 });
   };
   const handleBreakChange = (v) => {
-    setTimeSettings({ ...timeSettings, break: v * 60 });
+    setTimeSettings({ ...timeSettings, shortBreak: v * 60 });
   };
   const handleLongBreakChange = (v) => {
     setTimeSettings({ ...timeSettings, longBreak: v * 60 });
@@ -71,6 +71,7 @@ const Settings = memo(({ toggleModal }) => {
           <TimeInputElement>
             <TimeInputLabel>pomodoro</TimeInputLabel>
             <Timeinput
+              name="pomodoro"
               currentValue={timeSettings.pomodoro / 60}
               onChange={handlePomodoroChange}
             />
@@ -78,13 +79,15 @@ const Settings = memo(({ toggleModal }) => {
           <TimeInputElement>
             <TimeInputLabel>short break</TimeInputLabel>
             <Timeinput
-              currentValue={timeSettings.break / 60}
+              name="shortBreak"
+              currentValue={timeSettings.shortBreak / 60}
               onChange={handleBreakChange}
             />
           </TimeInputElement>
           <TimeInputElement>
             <TimeInputLabel>long break</TimeInputLabel>
             <Timeinput
+              name="longBreak"
               currentValue={timeSettings.longBreak / 60}
               onChange={handleLongBreakChange}
             />
@@ -129,6 +132,7 @@ const Settings = memo(({ toggleModal }) => {
         <div>COLOR</div>
         <div>
           <Dot
+            data-testid="#F87070-btn"
             onClick={() => handleThemeSettings("color", "#F87070")}
             color={"#F87070"}
           >
@@ -141,6 +145,7 @@ const Settings = memo(({ toggleModal }) => {
             )}
           </Dot>
           <Dot
+            data-testid="#70F3F8-btn"
             onClick={() => handleThemeSettings("color", "#70F3F8")}
             color={"#70F3F8"}
           >
@@ -153,6 +158,7 @@ const Settings = memo(({ toggleModal }) => {
             )}
           </Dot>
           <Dot
+            data-testid="#D881F8-btn"
             onClick={() => handleThemeSettings("color", "#D881F8")}
             color={"#D881F8"}
           >
@@ -167,7 +173,12 @@ const Settings = memo(({ toggleModal }) => {
         </div>
       </ColorContainer>
       <div onClick={toggleModal}>
-        <Button onClick={() => handleDispatch()}>Apply</Button>
+        <Button
+          data-testid="apply-settings-btn"
+          onClick={() => handleDispatch()}
+        >
+          Apply
+        </Button>
       </div>
     </>
   );

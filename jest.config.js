@@ -9,6 +9,9 @@ module.exports = {
   moduleNameMapper: {
     /* Handle module path alias imports*/
     "^@components/(.*)$": "<rootDir>/components/$1",
+    "^@hooks/(.*)$": "<rootDir>/hooks/$1",
+    "^@utils/(.*)$": "<rootDir>/utils/$1",
+    "^@state/(.*)$": "<rootDir>/state/$1",
 
     /* Handle CSS imports (with CSS modules)
     https://jestjs.io/docs/webpack#mocking-css-modules */

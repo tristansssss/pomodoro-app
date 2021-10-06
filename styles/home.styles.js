@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { mediaQueries } from "utils/mediaQueries";
+import { mediaQueries } from "@utils/mediaQueries";
 
 export const CardContainer = styled.section`
   display: grid;
